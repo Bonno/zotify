@@ -6,7 +6,6 @@ FROM base as builder
 
 WORKDIR /install
 COPY requirements.txt /requirements.txt
-
 RUN apk add gcc libc-dev zlib zlib-dev jpeg-dev
 RUN pip install --prefix="/install" -r /requirements.txt
 

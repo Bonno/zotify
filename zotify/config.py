@@ -263,7 +263,9 @@ class Config:
     def get_temp_download_dir(cls) -> str:
         if cls.get(TEMP_DOWNLOAD_DIR) == '':
             return ''
-        return PurePath(cls.get_root_path()).joinpath(cls.get(TEMP_DOWNLOAD_DIR))
+        temp_download_dir = PurePath(cls.get_root_path()).joinpath(cls.get(TEMP_DOWNLOAD_DIR))
+        Path(temp_download_dir).mkdir(parents=True, exist_ok=True)
+        return temp_download_dir
 
     @classmethod
     def get_save_genres(cls) -> bool:
