@@ -11,7 +11,7 @@ from zotify.const import TYPE, \
     PLAYLIST_READ_PRIVATE, USER_LIBRARY_READ, USER_FOLLOW_READ
 from zotify.config import Config
 
-class Zotify:    
+class Zotify:
     SESSION: Session = None
     DOWNLOAD_QUALITY = None
     CONFIG: Config = Config()
@@ -33,20 +33,43 @@ class Zotify:
                 return
             except RuntimeError:
                 pass
-        while True:
-            user_name = args.username if args.username else ''
-            while len(user_name) == 0:
-                user_name = input('Username: ')
-            password = args.password if args.password else pwinput(prompt='Password: ', mask='*')
-            try:
-                if Config.get_save_credentials():
-                    conf = Session.Configuration.Builder().set_stored_credential_file(cred_location).build()
-                else:
-                    conf = Session.Configuration.Builder().set_store_credentials(False).build()
-                cls.SESSION = Session.Builder(conf).user_pass(user_name, password).create()
-                return
-            except RuntimeError:
-                pass
+
+            #while True:
+                #try:
+                    #user_name = args.username if args.username else ''
+                    #while len(user_name) == 0:
+                    #    user_name = input('Username: ')
+                    #password = args.password if args.password else pwinput(prompt='Password: ', mask='*')
+                    #try:
+                    #    if Config.get_save_credentials():
+                    #        conf = Session.Configuration.Builder().set_stored_credential_file(cred_location).build()
+                    #    else:
+                    #        conf = Session.Configuration.Builder().set_store_credentials(False).build()
+                    #    cls.SESSION = Session.Builder(conf).user_pass(user_name, password).create()
+                    #    return
+                    #except RuntimeError:
+                    #    pass
+
+        from zotify.termoutput import Printer, PrintChannel
+        from librespot.zeroconf import ZeroconfServer
+        import shutil
+        import pathlib
+        import sys
+
+        try:
+            zs = ZeroconfServer.Builder().create()
+            Printer.print(PrintChannel.WARNINGS, "Transfer playback from desktop client to 'librespot-python' via Spotify Connect in order to store session")
+
+            while not zs._ZeroconfServer__session:
+                time.sleep(1)
+            else:
+                if pathlib.Path("credentials.json").exists():
+                    Printer.print(PrintChannel.WARNINGS, f"Grabbed session for {zs._ZeroconfServer__session.username()}, restart the program to use the new credentials.")
+
+            shutil.move('credentials.json', cred_location)
+            exit()
+        except RuntimeError:
+            pass
 
     @classmethod
     def get_content_stream(cls, content_id, quality):

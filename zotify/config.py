@@ -3,7 +3,6 @@ import sys
 from pathlib import Path, PurePath
 from typing import Any
 
-
 ROOT_PATH = 'ROOT_PATH'
 ROOT_PODCAST_PATH = 'ROOT_PODCAST_PATH'
 SKIP_EXISTING = 'SKIP_EXISTING'
@@ -270,7 +269,7 @@ class Config:
     @classmethod
     def get_save_genres(cls) -> bool:
         return cls.get(MD_SAVE_GENRES)
-    
+
     @classmethod
     def get_all_genres(cls) -> bool:
         return cls.get(MD_ALLGENRES)
@@ -278,7 +277,7 @@ class Config:
     @classmethod
     def get_all_genres_delimiter(cls) -> bool:
         return cls.get(MD_GENREDELIMITER)
-    
+
     @classmethod
     def get_output(cls, mode: str) -> str:
         v = cls.get(OUTPUT)
