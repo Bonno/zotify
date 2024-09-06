@@ -53,10 +53,11 @@ def main():
                        help='Downloads tracks, playlists and albums from the URLs written in the file passed.')
 
     for configkey in CONFIG_VALUES:
-        parser.add_argument(CONFIG_VALUES[configkey]['arg'],
-                            type=str,
-                            default=None,
-                            help='Specify the value of the ['+configkey+'] config value')
+        if 'arg' in CONFIG_VALUES[configkey]:
+            parser.add_argument(CONFIG_VALUES[configkey]['arg'],
+                                type=str,
+                                default=None,
+                                help='Specify the value of the ['+configkey+'] config value')
 
     parser.set_defaults(func=client)
 

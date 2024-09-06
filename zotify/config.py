@@ -21,6 +21,12 @@ SONG_ARCHIVE = 'SONG_ARCHIVE'
 SAVE_CREDENTIALS = 'SAVE_CREDENTIALS'
 CREDENTIALS_LOCATION = 'CREDENTIALS_LOCATION'
 OUTPUT = 'OUTPUT'
+OUTPUT_DEFAULT_PLAYLIST = 'OUTPUT_DEFAULT_PLAYLIST'
+OUTPUT_DEFAULT_PLAYLIST_EXT = 'OUTPUT_DEFAULT_PLAYLIST_EXT'
+OUTPUT_DEFAULT_LIKED_SONGS = 'OUTPUT_DEFAULT_LIKED_SONGS'
+OUTPUT_DEFAULT_LIKED_SONGS = 'OUTPUT_DEFAULT_LIKED_SONGS'
+OUTPUT_DEFAULT_SINGLE = 'OUTPUT_DEFAULT_SINGLE'
+OUTPUT_DEFAULT_ALBUM = 'OUTPUT_DEFAULT_ALBUM'
 PRINT_SPLASH = 'PRINT_SPLASH'
 PRINT_SKIPS = 'PRINT_SKIPS'
 PRINT_DOWNLOAD_PROGRESS = 'PRINT_DOWNLOAD_PROGRESS'
@@ -38,45 +44,43 @@ CONFIG_VERSION = 'CONFIG_VERSION'
 DOWNLOAD_LYRICS = 'DOWNLOAD_LYRICS'
 
 CONFIG_VALUES = {
-    SAVE_CREDENTIALS:           { 'default': 'True',  'type': bool, 'arg': '--save-credentials'           },
-    CREDENTIALS_LOCATION:       { 'default': '',      'type': str,  'arg': '--credentials-location'       },
-    OUTPUT:                     { 'default': '',      'type': str,  'arg': '--output'                     },
-    SONG_ARCHIVE:               { 'default': '',      'type': str,  'arg': '--song-archive'               },
-    ROOT_PATH:                  { 'default': '',      'type': str,  'arg': '--root-path'                  },
-    ROOT_PODCAST_PATH:          { 'default': '',      'type': str,  'arg': '--root-podcast-path'          },
-    SPLIT_ALBUM_DISCS:          { 'default': 'False', 'type': bool, 'arg': '--split-album-discs'          },
-    DOWNLOAD_LYRICS:            { 'default': 'True',  'type': bool, 'arg': '--download-lyrics'            },
-    MD_SAVE_GENRES:             { 'default': 'False', 'type': bool, 'arg': '--md-save-genres'             },
-    MD_ALLGENRES:               { 'default': 'False', 'type': bool, 'arg': '--md-allgenres'               },
-    MD_GENREDELIMITER:          { 'default': ',',     'type': str,  'arg': '--md-genredelimiter'          },
-    DOWNLOAD_FORMAT:            { 'default': 'ogg',   'type': str,  'arg': '--download-format'            },
-    DOWNLOAD_QUALITY:           { 'default': 'auto',  'type': str,  'arg': '--download-quality'           },
-    TRANSCODE_BITRATE:          { 'default': 'auto',  'type': str,  'arg': '--transcode-bitrate'          },
-    SKIP_EXISTING:              { 'default': 'True',  'type': bool, 'arg': '--skip-existing'              },
+    SAVE_CREDENTIALS: { 'default': 'True', 'type': bool, 'arg': '--save-credentials' },
+    CREDENTIALS_LOCATION: { 'default': '', 'type': str, 'arg': '--credentials-location' },
+    OUTPUT: { 'default': '', 'type': str, 'arg': '--output' },
+    OUTPUT_DEFAULT_PLAYLIST: { 'default': '{playlist}/{artist} - {song_name}.{ext}', 'type': str },
+    OUTPUT_DEFAULT_PLAYLIST_EXT: { 'default': '{playlist}/{playlist_num} - {artist} - {song_name}.{ext}', 'type': str },
+    OUTPUT_DEFAULT_LIKED_SONGS: { 'default': 'Liked Songs/{artist} - {song_name}.{ext}', 'type': str },
+    OUTPUT_DEFAULT_SINGLE: { 'default': '{artist}/{album}/{artist} - {song_name}.{ext}', 'type': str },
+    OUTPUT_DEFAULT_ALBUM: { 'default': '{artist}/{album}/{album_num} - {artist} - {song_name}.{ext}', 'type': str },
+    SONG_ARCHIVE: { 'default': '', 'type': str, 'arg': '--song-archive' },
+    ROOT_PATH: { 'default': '', 'type': str, 'arg': '--root-path'  },
+    ROOT_PODCAST_PATH: { 'default': '', 'type': str, 'arg': '--root-podcast-path' },
+    SPLIT_ALBUM_DISCS: { 'default': 'False', 'type': bool, 'arg': '--split-album-discs' },
+    DOWNLOAD_LYRICS: { 'default': 'True', 'type': bool, 'arg': '--download-lyrics' },
+    MD_SAVE_GENRES: { 'default': 'False', 'type': bool, 'arg': '--md-save-genres' },
+    MD_ALLGENRES: { 'default': 'False', 'type': bool, 'arg': '--md-allgenres' },
+    MD_GENREDELIMITER: { 'default': ',', 'type': str, 'arg': '--md-genredelimiter' },
+    DOWNLOAD_FORMAT: { 'default': 'ogg', 'type': str, 'arg': '--download-format' },
+    DOWNLOAD_QUALITY: { 'default': 'auto', 'type': str, 'arg': '--download-quality' },
+    TRANSCODE_BITRATE: { 'default': 'auto', 'type': str, 'arg': '--transcode-bitrate' },
+    SKIP_EXISTING: { 'default': 'True', 'type': bool, 'arg': '--skip-existing' },
     SKIP_PREVIOUSLY_DOWNLOADED: { 'default': 'False', 'type': bool, 'arg': '--skip-previously-downloaded' },
-    RETRY_ATTEMPTS:             { 'default': '1',     'type': int,  'arg': '--retry-attempts'             },
-    BULK_WAIT_TIME:             { 'default': '1',     'type': int,  'arg': '--bulk-wait-time'             },
-    OVERRIDE_AUTO_WAIT:         { 'default': 'False', 'type': bool, 'arg': '--override-auto-wait'         },
-    CHUNK_SIZE:                 { 'default': '20000', 'type': int,  'arg': '--chunk-size'                 },
-    DOWNLOAD_REAL_TIME:         { 'default': 'False', 'type': bool, 'arg': '--download-real-time'         },
-    LANGUAGE:                   { 'default': 'en',    'type': str,  'arg': '--language'                   },
-    PRINT_SPLASH:               { 'default': 'False', 'type': bool, 'arg': '--print-splash'               },
-    PRINT_SKIPS:                { 'default': 'True',  'type': bool, 'arg': '--print-skips'                },
-    PRINT_DOWNLOAD_PROGRESS:    { 'default': 'True',  'type': bool, 'arg': '--print-download-progress'    },
-    PRINT_ERRORS:               { 'default': 'True',  'type': bool, 'arg': '--print-errors'               },
-    PRINT_DOWNLOADS:            { 'default': 'False', 'type': bool, 'arg': '--print-downloads'            },
-    PRINT_API_ERRORS:           { 'default': 'True',  'type': bool, 'arg': '--print-api-errors'           },
-    PRINT_PROGRESS_INFO:        { 'default': 'True',  'type': bool, 'arg': '--print-progress-info'        },
-    PRINT_WARNINGS:             { 'default': 'True',  'type': bool, 'arg': '--print-warnings'             },
-    TEMP_DOWNLOAD_DIR:          { 'default': '',      'type': str,  'arg': '--temp-download-dir'          }
+    RETRY_ATTEMPTS: { 'default': '1', 'type': int, 'arg': '--retry-attempts' },
+    BULK_WAIT_TIME: { 'default': '1', 'type': int, 'arg': '--bulk-wait-time' },
+    OVERRIDE_AUTO_WAIT: { 'default': 'False', 'type': bool, 'arg': '--override-auto-wait' },
+    CHUNK_SIZE:  { 'default': '20000', 'type': int, 'arg': '--chunk-size' },
+    DOWNLOAD_REAL_TIME: { 'default': 'False', 'type': bool, 'arg': '--download-real-time' },
+    LANGUAGE:  { 'default': 'en', 'type': str, 'arg': '--language'  },
+    PRINT_SPLASH: { 'default': 'False', 'type': bool, 'arg': '--print-splash' },
+    PRINT_SKIPS: { 'default': 'True', 'type': bool, 'arg': '--print-skips' },
+    PRINT_DOWNLOAD_PROGRESS: { 'default': 'True', 'type': bool, 'arg': '--print-download-progress' },
+    PRINT_ERRORS: { 'default': 'True', 'type': bool, 'arg': '--print-errors' },
+    PRINT_DOWNLOADS: { 'default': 'False', 'type': bool, 'arg': '--print-downloads' },
+    PRINT_API_ERRORS: { 'default': 'True', 'type': bool, 'arg': '--print-api-errors' },
+    PRINT_PROGRESS_INFO: { 'default': 'True', 'type': bool, 'arg': '--print-progress-info' },
+    PRINT_WARNINGS: { 'default': 'True', 'type': bool, 'arg': '--print-warnings' },
+    TEMP_DOWNLOAD_DIR: { 'default': '', 'type': str, 'arg': '--temp-download-dir' }
 }
-
-OUTPUT_DEFAULT_PLAYLIST = '{playlist}/{artist} - {song_name}.{ext}'
-OUTPUT_DEFAULT_PLAYLIST_EXT = '{playlist}/{playlist_num} - {artist} - {song_name}.{ext}'
-OUTPUT_DEFAULT_LIKED_SONGS = 'Liked Songs/{artist} - {song_name}.{ext}'
-OUTPUT_DEFAULT_SINGLE = '{artist}/{album}/{artist} - {song_name}.{ext}'
-OUTPUT_DEFAULT_ALBUM = '{artist}/{album}/{album_num} - {artist} - {song_name}.{ext}'
-
 
 class Config:
     Values = {}
@@ -280,29 +284,29 @@ class Config:
             return v
         if mode == 'playlist':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_PLAYLIST).parent
+                split = PurePath(cls.get(OUTPUT_DEFAULT_PLAYLIST)).parent
                 return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
-            return OUTPUT_DEFAULT_PLAYLIST
+            return cls.get(OUTPUT_DEFAULT_PLAYLIST)
         if mode == 'extplaylist':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_PLAYLIST_EXT).parent
+                split = PurePath(cls.get(OUTPUT_DEFAULT_PLAYLIST_EXT)).parent
                 return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
-            return OUTPUT_DEFAULT_PLAYLIST_EXT
+            return cls.get(OUTPUT_DEFAULT_PLAYLIST_EXT)
         if mode == 'liked':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_LIKED_SONGS).parent
+                split = PurePath(cls.get(OUTPUT_DEFAULT_LIKED_SONGS)).parent
                 return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
-            return OUTPUT_DEFAULT_LIKED_SONGS
+            return cls.get(OUTPUT_DEFAULT_LIKED_SONGS)
         if mode == 'single':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_SINGLE).parent
+                split = PurePath(cls.get(OUTPUT_DEFAULT_SINGLE)).parent
                 return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
-            return OUTPUT_DEFAULT_SINGLE
+            return cls.get(OUTPUT_DEFAULT_SINGLE)
         if mode == 'album':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_ALBUM).parent
+                split = PurePath(cls.get(OUTPUT_DEFAULT_ALBUM)).parent
                 return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
-            return OUTPUT_DEFAULT_ALBUM
+            return cls.get(OUTPUT_DEFAULT_ALBUM)
         raise ValueError()
 
     @classmethod
